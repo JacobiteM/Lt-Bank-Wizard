@@ -1,54 +1,40 @@
 import 'dotenv/config';
-import express from 'express';
-import {
-  InteractionType,
-  InteractionResponseType,
-} from 'discord-interactions';
-import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
+import Eris from 'eris';
 
-// Create an express app
-const app = express();
-// Get port, or default to 3000
-const PORT = process.env.PORT || 3000;
-// Parse request body and verifies incoming requests using discord-interactions package
-app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
+const bot = new Eris(process.env.DISCORD_TOKEN);
 
-
-/**
- * Interactions endpoint URL where Discord will send HTTP requests
- */
-app.post('/interactions', async function (req, res) {
-  // Interaction type and data
-  const { type, id, data } = req.body;
-
-  /**
-   * Handle verification requests
-   */
-  if (type === InteractionType.PING) {
-    return res.send({ type: InteractionResponseType.PONG });
-  }
-
-  /**
-   * Handle slash command requests
-   * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
-   */
-  if (type === InteractionType.APPLICATION_COMMAND) {
-    const { name } = data;
-
-    // "test" command
-    if (name === 'test') {
-      // Send a message into the channel where command was triggered from
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          // Fetches a random emoji to send from a helper function
-          content: 'hello world ' + getRandomEmoji(),
-        },
-      });
-    }
-  }
+bot.on('ready', () => {
+  console.log('Bot is ready!');
 });
 
-app.listen(PORT, () => {
-  console.log('Listening on port', PORT);
+bot.on("ready", async () => {
+  await bot.createCommand({
+    name: 'tests',
+    description: 'Basic command',
+    type: 1,
+    options: [{
+        name: 'itemid',
+        description: 'lol',
+        type: 4,
+        required: true,
+      },
+      {
+        name: 'itemdesc',
+        description: 'lol',
+        type: 3,
+        required: true,
+      },
+    ],
+  })
 });
+
+bot.on("interactionCreate", interaction => {
+  if (typeof interaction === 'object') {
+    if (interaction.data.name == "tests") {
+      return interaction.createMessage("<@&937379340549783622>" + ", \n Item ID: " + interaction.data.options[0].value + ", \n Item Desc: " + interaction.data.options[1].value);
+    };
+  };
+});
+
+bot.connect();
+
