@@ -1,7 +1,7 @@
 {
-  "name": "lt-bank-wizard",
+  "name": "lt-utils-wizard",
   "version": "1.0.0",
-  "description": "Lt Bank Bot",
+  "description": "Lt Utils Bot",
   "main": "app.js",
   "type": "module",
   "scripts": {

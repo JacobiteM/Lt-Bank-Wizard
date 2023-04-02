@@ -1,7 +1,8 @@
 import 'dotenv/config';
 import {InstallGlobalCommands } from './utils.js';
 
-// Get the game choices from game.js
+//This class is *needed*
+
 function createCommandChoices() {
   const choices = getRPSChoices();
   const commandChoices = [];
@@ -16,13 +17,6 @@ function createCommandChoices() {
   return commandChoices;
 }
 
-// Simple test command
-const TEST_COMMAND = {
-  name: 'test',
-  description: 'Basic command',
-  type: 1,
-};
-
-const ALL_COMMANDS = [TEST_COMMAND];
+const ALL_COMMANDS = [];
 
 InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);
