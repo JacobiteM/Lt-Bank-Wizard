@@ -4,13 +4,11 @@ import Eris from 'eris';
 //Boot strapping is top tier
 const bot = new Eris(process.env.DISCORD_TOKEN);
 
-//Hello, is this this on?
-bot.on('ready', () => {
-  console.log('Bot is ready!');
-});
-
 //What commands do we provide
 bot.on("ready", async () => {
+  //Hello, is this this on?
+  console.log('Bot is ready!');
+
   //wait for bank reforge slash-command
   await bot.createCommand({
     name: 'rf',
@@ -66,9 +64,6 @@ bot.on("ready", async () => {
 
 //handle interactions from users
 bot.on("interactionCreate", interaction => {
-  //Yeah, I know it's object
-  if (typeof interaction === 'object') {
-
     //Received a bank reforge request slash command
     if (interaction.data.name == "rf") {
       return interaction.createMessage(
@@ -85,7 +80,6 @@ bot.on("interactionCreate", interaction => {
             ",\nTutee PID: " + interaction.data.options[2].value +
             ",\nSkill: " + interaction.data.options[3].value);
     };
-  };
 });
 
 bot.connect();
