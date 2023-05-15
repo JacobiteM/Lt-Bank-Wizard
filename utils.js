@@ -1,9 +1,7 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
-import { verifyKey } from 'discord-interactions';
 
 /* This class is also *needed* to allow registration of commands to Discord
-*   And other utils, I am sure
 */
 
 export async function DiscordRequest(endpoint, options) {

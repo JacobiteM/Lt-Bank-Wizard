@@ -1,8 +1,6 @@
 import 'dotenv/config';
 import {InstallGlobalCommands } from './utils.js';
 
-//This class is *needed*
-
 function createCommandChoices() {
   const choices = getRPSChoices();
   const commandChoices = [];
