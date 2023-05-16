@@ -75,62 +75,6 @@ bot.on("ready", async () => {
     ],
   })
 
-  // //Create oathsworn slash-command
-  // await bot.createCommand({
-  //   name: 'oathsworn',
-  //   description: 'Oathswear a target',
-  //   type: 1,
-  //   options: [{
-  //       name: 'target-pid',
-  //       description: 'The player ID of the oath target',
-  //       type: 4,
-  //       required: true,
-  //     },
-  //     {
-  //       name: 'faction-or-guild',
-  //       description: 'Faction or Guild?',
-  //       type: 3,
-  //       required: true,
-  //       choices: [
-  //         { name: "Faction", value: "Faction" },
-  //         { name: "Guild", value: "Guild" },
-  //       ]
-  //     },
-  //     {
-  //       name: 'name-of-faction-or-guild',
-  //       description: 'The name of faction or guild, i.e Lions',
-  //       type: 3,
-  //       required: true,
-  //       choices: [
-  //             { name: "Bears", value: "Bears" },
-  //             { name: "Dragons", value: "Dragons" },
-  //             { name: "Gryphons", value: "Gryphons" },
-  //             { name: "Harts", value: "Harts" },
-  //             { name: "Jackals", value: "Jackals" },
-  //             { name: "Lions", value: "Lions" },
-  //             { name: "Tarantulas", value: "Tarantulas" },
-  //             { name: "Unicorns", value: "Unicorns" },
-  //             { name: "Vipers", value: "Vipers" },
-  //             { name: "Wolves", value: "Wolves" },
-  //             { name: "Alchemists", value: "Alchemists" },
-  //             { name: "Armourers", value: "Armourers" },
-  //             { name: "Bank", value: "Bank" },
-  //             { name: "Bards", value: "Bards" },
-  //             { name: "Casino", value: "Casino" },
-  //             { name: "Corrupters", value: "Corrupters" },
-  //             { name: "Healers", value: "Healers" },
-  //             { name: "Incantors", value: "Incantors" },
-  //             { name: "Mages", value: "Mages" },
-  //             { name: "Militia", value: "Militia" },
-  //             { name: "Rangers", value: "Rangers" },
-  //             { name: "Scouts", value: "Scouts" },
-  //             { name: "Watchers", value: "Watchers" },
-  //             { name: "Library", value: "Library" },
-  //           ]
-  //     },
-  //   ],
-  // })
-
   //Create oathsworn slash-command
   await bot.createCommand({
     name: 'oathsworn',
