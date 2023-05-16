@@ -75,6 +75,62 @@ bot.on("ready", async () => {
     ],
   })
 
+  // //Create oathsworn slash-command
+  // await bot.createCommand({
+  //   name: 'oathsworn',
+  //   description: 'Oathswear a target',
+  //   type: 1,
+  //   options: [{
+  //       name: 'target-pid',
+  //       description: 'The player ID of the oath target',
+  //       type: 4,
+  //       required: true,
+  //     },
+  //     {
+  //       name: 'faction-or-guild',
+  //       description: 'Faction or Guild?',
+  //       type: 3,
+  //       required: true,
+  //       choices: [
+  //         { name: "Faction", value: "Faction" },
+  //         { name: "Guild", value: "Guild" },
+  //       ]
+  //     },
+  //     {
+  //       name: 'name-of-faction-or-guild',
+  //       description: 'The name of faction or guild, i.e Lions',
+  //       type: 3,
+  //       required: true,
+  //       choices: [
+  //             { name: "Bears", value: "Bears" },
+  //             { name: "Dragons", value: "Dragons" },
+  //             { name: "Gryphons", value: "Gryphons" },
+  //             { name: "Harts", value: "Harts" },
+  //             { name: "Jackals", value: "Jackals" },
+  //             { name: "Lions", value: "Lions" },
+  //             { name: "Tarantulas", value: "Tarantulas" },
+  //             { name: "Unicorns", value: "Unicorns" },
+  //             { name: "Vipers", value: "Vipers" },
+  //             { name: "Wolves", value: "Wolves" },
+  //             { name: "Alchemists", value: "Alchemists" },
+  //             { name: "Armourers", value: "Armourers" },
+  //             { name: "Bank", value: "Bank" },
+  //             { name: "Bards", value: "Bards" },
+  //             { name: "Casino", value: "Casino" },
+  //             { name: "Corrupters", value: "Corrupters" },
+  //             { name: "Healers", value: "Healers" },
+  //             { name: "Incantors", value: "Incantors" },
+  //             { name: "Mages", value: "Mages" },
+  //             { name: "Militia", value: "Militia" },
+  //             { name: "Rangers", value: "Rangers" },
+  //             { name: "Scouts", value: "Scouts" },
+  //             { name: "Watchers", value: "Watchers" },
+  //             { name: "Library", value: "Library" },
+  //           ]
+  //     },
+  //   ],
+  // })
+
   //Create oathsworn slash-command
   await bot.createCommand({
     name: 'oathsworn',
@@ -87,46 +143,44 @@ bot.on("ready", async () => {
         required: true,
       },
       {
-        name: 'faction-or-guild',
-        description: 'Faction or Guild?',
+        name: 'faction',
+        description: 'The name of a faction, i.e Lions',
         type: 3,
-        required: true,
+        required: false,
         choices: [
-          { name: "Faction", value: "Faction" },
-          { name: "Guild", value: "Guild" },
+            { name: "Bears", value: "Bears" },
+            { name: "Dragons", value: "Dragons" },
+            { name: "Gryphons", value: "Gryphons" },
+            { name: "Harts", value: "Harts" },
+            { name: "Jackals", value: "Jackals" },
+            { name: "Lions", value: "Lions" },
+            { name: "Tarantulas", value: "Tarantulas" },
+            { name: "Unicorns", value: "Unicorns" },
+            { name: "Vipers", value: "Vipers" },
+            { name: "Wolves", value: "Wolves" },
         ]
       },
       {
-        name: 'name-of-faction-or-guild',
-        description: 'The name of faction or guild, i.e Lions',
+        name: 'guild',
+        description: 'The name of a guild, i.e Scouts',
         type: 3,
-        required: true,
+        required: false,
         choices: [
-              { name: "Bears", value: "Bears" },
-              { name: "Dragons", value: "Dragons" },
-              { name: "Gryphons", value: "Gryphons" },
-              { name: "Harts", value: "Harts" },
-              { name: "Jackals", value: "Jackals" },
-              { name: "Lions", value: "Lions" },
-              { name: "Tarantulas", value: "Tarantulas" },
-              { name: "Unicorns", value: "Unicorns" },
-              { name: "Vipers", value: "Vipers" },
-              { name: "Wolves", value: "Wolves" },
-              { name: "Alchemists", value: "Alchemists" },
-              { name: "Armourers", value: "Armourers" },
-              { name: "Bank", value: "Bank" },
-              { name: "Bards", value: "Bards" },
-              { name: "Casino", value: "Casino" },
-              { name: "Corrupters", value: "Corrupters" },
-              { name: "Healers", value: "Healers" },
-              { name: "Incantors", value: "Incantors" },
-              { name: "Mages", value: "Mages" },
-              { name: "Militia", value: "Militia" },
-              { name: "Rangers", value: "Rangers" },
-              { name: "Scouts", value: "Scouts" },
-              { name: "Watchers", value: "Watchers" },
-              { name: "Library", value: "Library" },
-            ]
+            { name: "Alchemists", value: "Alchemists" },
+            { name: "Armourers", value: "Armourers" },
+            { name: "Bank", value: "Bank" },
+            { name: "Bards", value: "Bards" },
+            { name: "Casino", value: "Casino" },
+            { name: "Corrupters", value: "Corrupters" },
+            { name: "Healers", value: "Healers" },
+            { name: "Incantors", value: "Incantors" },
+            { name: "Mages", value: "Mages" },
+            { name: "Militia", value: "Militia" },
+            { name: "Rangers", value: "Rangers" },
+            { name: "Scouts", value: "Scouts" },
+            { name: "Watchers", value: "Watchers" },
+            { name: "Library", value: "Library" },
+        ]
       },
     ],
   })
@@ -177,11 +231,30 @@ bot.on("interactionCreate", async interaction => {
 
     //Received an oathsworn request slash command
     if (interaction.data.name == "oathsworn") {
-      //Return an Oathsworn message to channel
-      return interaction.createMessage(
+
+      if (interaction.data.options[1] === undefined && interaction.data.options[2] === undefined) {
+        await interaction.createMessage({
+          content: "Please provide either a faction or a guild.",
+          flags: 64 //EPHEMERAL Flag, Only user will see this
+        });
+        return;
+      } else if (interaction.data.options[1] != undefined && interaction.data.options[2] != undefined) {
+        await interaction.createMessage({
+          content: "You can't oathswear a person to both a faction and a guild in one command",
+          flags: 64 //EPHEMERAL Flag, Only user will see this
+        });
+        return;
+      } else if (interaction.data.options[1] === undefined) {
+        //Return an guild message to channel
+        return interaction.createMessage(
         "Target PID: " + interaction.data.options[0].value + 
-        ",\n" + interaction.data.options[1].value +
         ",\n" + interaction.data.options[2].value);
+      } else if (interaction.data.options[2] === undefined) {
+        //Return a faction message to channel
+        return interaction.createMessage(
+        "Target PID: " + interaction.data.options[0].value + 
+        ",\n" + interaction.data.options[1].value);
+      }
     };
 });
 
