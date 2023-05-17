@@ -148,14 +148,14 @@ bot.on("interactionCreate", async interaction => {
       if (interaction.data.options[3] === undefined) {
         return interaction.createMessage(
           "Date: " + currentDate.toLocaleDateString() +
-          ",\n# - " + reforgeDiscordJobNumber +
+          ",\nJob#: " + reforgeDiscordJobNumber +
           ",\nReforger PID: " + interaction.data.options[0].value +
           ",\nReforger Player Name: " + interaction.data.options[1].value +
           ",\nItem ID: " + interaction.data.options[2].value);
       } else {
         return interaction.createMessage(
           "Date: " + currentDate.toLocaleDateString() +
-          ",\n# - " + reforgeDiscordJobNumber +
+          ",\nJob#: " + reforgeDiscordJobNumber +
           ",\nReforger PID: " + interaction.data.options[0].value +
           ",\nReforger Player Name: " + interaction.data.options[1].value +
           ",\nItem ID: " + interaction.data.options[2].value + 
