@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import Discord from 'discord.js';
 import Eris from 'eris';
 
 //Boot strapping is top tier
@@ -219,12 +220,16 @@ bot.on("error", (err) => {
  * This needs to be asynchronous otherwise parts of other functions will occur before Discord has responded
  */
 async function getTodaysMessageCountFromChannel(channelID) {
-  var startTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0).getTime();
-  var endTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 23, 59, 59, 999).getTime();
+  const currentDate = new Date();
+  // Set the time to the start of the day
+  const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0, 0);
+  // Set the time to the end of the day
+  const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 23, 59, 59, 999);
+
   const channel = await bot.getChannel(channelID);
   var messageCount = 0;
 
-  await getMessageCount(channel, startTime, endTime).then(count => {
+  await getMessageCount(channel, Discord.SnowflakeUtil.generate(startDate), Discord.SnowflakeUtil.generate(endDate)).then(count => {
     messageCount = count;
   }).catch(err => {
     console.error(err);
@@ -235,11 +240,12 @@ async function getTodaysMessageCountFromChannel(channelID) {
 /**
  * Get a collection of Discord messages using a channel ID, startTime and endTime
  * Then return the length of that collection
+ * Filter by date and bot as author
  */
 async function getMessageCount(channel, startTime, endTime) {
   return new Promise(async (resolve, reject) => {
-    await channel.getMessages({after: startTime, before: endTime, limit:2000}).then(messages => {
-      const filteredMessages = messages.filter((message) => !message.messageReference);
+    await channel.getMessages(2000, undefined, startTime, endTime).then(messages => {
+      const filteredMessages = messages.filter((message) => !message.messageReference && message.author.id === bot.user.id);
       const count = filteredMessages.length;
       resolve(count);
     }).catch(err => {
